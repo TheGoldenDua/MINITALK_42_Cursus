@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   is_digit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: del-ganb <del-ganb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/23 15:20:58 by del-ganb          #+#    #+#             */
-/*   Updated: 2024/04/18 07:05:52 by del-ganb         ###   ########.fr       */
+/*   Created: 2024/04/18 06:31:55 by del-ganb          #+#    #+#             */
+/*   Updated: 2024/04/18 06:56:06 by del-ganb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
 
-# include <printf.h>
-# include <signal.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+#include "../minitalk.h"
 
-int	is_digit(char *str);
-int	ft_printf(const char *str, ...);
+static int	ft_isdigit(int c)
+{
+	return (c <= '9' && c >= '0');
+}
 
-#endif
+int	is_digit(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}

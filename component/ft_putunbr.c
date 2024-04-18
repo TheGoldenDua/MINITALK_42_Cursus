@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_putunbr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: del-ganb <del-ganb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/23 15:20:58 by del-ganb          #+#    #+#             */
-/*   Updated: 2024/04/18 07:05:52 by del-ganb         ###   ########.fr       */
+/*   Created: 2024/04/18 06:32:36 by del-ganb          #+#    #+#             */
+/*   Updated: 2024/04/18 06:32:39 by del-ganb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
 
-# include <printf.h>
-# include <signal.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+#include "ft_printf.h"
 
-int	is_digit(char *str);
-int	ft_printf(const char *str, ...);
+void	ft_putunbr(int nb, int *len)
+{
+	unsigned int	n;
 
-#endif
+	n = nb;
+	if (n >= 10)
+	{
+		ft_putnbr(n / 10, len);
+		ft_putchar((n % 10) + '0', len);
+	}
+	else
+		ft_putchar(n + '0', len);
+}

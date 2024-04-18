@@ -5,44 +5,35 @@
 #                                                     +:+ +:+         +:+      #
 #    By: del-ganb <del-ganb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/23 14:48:40 by del-ganb          #+#    #+#              #
-#    Updated: 2024/04/14 19:48:37 by del-ganb         ###   ########.fr        #
+#    Created: 2023/11/27 02:29:26 by del-ganb          #+#    #+#              #
+#    Updated: 2023/11/30 23:55:51 by del-ganb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CNAME = client
-SNAME = server
+SRCS = ft_printf.c \
+		ft_putchar.c \
+		ft_puthex.c \
+		ft_putnbr.c \
+		ft_putstr.c \
+		ft_putunbr.c \
+		ft_putvoid.c 
 
-CSRC = client.c
-SSRC = server.c
-
-COBJS = $(CSRC:.c=.o)
-SOBJS = $(SSRC:.c=.o)
-
+OBJS = $(SRCS:.c=.o)
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-
+NAME = libftprintf.a
 RM = rm -rf
 
-all: $(CNAME) $(SNAME)
+all: $(NAME)
 
-$(SNAME): $(SOBJS)
-	$(CC) $(CFLAGS) -o $@ $^
-
-$(CNAME): $(COBJS)
-	$(CC) $(CFLAGS) -o $@ $^
-
-$(COBJS): $(CSRC)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(SOBJS): $(SSRC)
-	$(CC) $(CFLAGS) -c $< -o $@
-
+$(NAME): $(OBJS)
+		ar rc $(NAME) $(OBJS)
+		
 clean:
-	$(RM) $(COBJS) $(SOBJS)
+		$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(SNAME) $(CNAME)
+		$(RM) $(NAME)
 
 re: fclean all
 
