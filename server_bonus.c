@@ -6,7 +6,7 @@
 /*   By: del-ganb <del-ganb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 16:30:01 by del-ganb          #+#    #+#             */
-/*   Updated: 2024/04/20 23:52:09 by del-ganb         ###   ########.fr       */
+/*   Updated: 2024/04/22 17:31:00 by del-ganb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void handle_signal(int signal, siginfo_t *info, void *ptr)
 {
     static char current_char;
     static int i;
+    int  client_pid;
     
+    (void ) ptr;
+    client_pid = info->si_pid;
     current_char |= (signal == SIGUSR1);
     i++;
     if(i == 8)
@@ -30,6 +33,7 @@ void handle_signal(int signal, siginfo_t *info, void *ptr)
     }
     else
         current_char <<= i;
+    kill(client_pid, signal);
 }
 
 int main()

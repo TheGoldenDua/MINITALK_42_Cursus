@@ -6,7 +6,7 @@
 /*   By: del-ganb <del-ganb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:33 by del-ganb          #+#    #+#             */
-/*   Updated: 2024/04/21 01:07:28 by del-ganb         ###   ########.fr       */
+/*   Updated: 2024/04/21 18:15:25 by del-ganb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		ft_putstr("errror, the parametres: <pid> <string to send>\n");
+		ft_putstr("Error, incorrect parameters: <pid> <string to send>\n");
 		return (0);
 	}
 	if (!is_digit(argv[1]))
 	{
-		ft_putstr("error, not a valid pid\n");
+		ft_putstr("Error, not a valid PID\n");
 		return (0);
 	}
 	server_id = ft_atoi(argv[1]);
