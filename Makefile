@@ -6,47 +6,58 @@
 #    By: del-ganb <del-ganb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/21 16:58:07 by del-ganb          #+#    #+#              #
-#    Updated: 2024/04/22 18:03:01 by del-ganb         ###   ########.fr        #
+#    Updated: 2024/04/23 04:11:14 by del-ganb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CNAME = client
 SNAME = server
+
 CBONUS_NAME = client_bonus
 SBONUS_NAME = server_bonus
 
 CSRC = client.c
 SSRC = server.c
+
+COBJS = $(CSRC:.c=.o)
+SOBJS = $(SSRC:.c=.o)
+
 CBONUS_SRC = client_bonus.c
 SBONUS_SRC = server_bonus.c
+
+SBONUS_OBJS = $(SBONUS_SRC:.c=.o)
+CBONUS_OBJS = $(CBONUS_SRC:.c=.o)
+
 UTILSRC = utils.c
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
-all: $(CNAME) $(SNAME) $(CBONUS_NAME) $(SBONUS_NAME)
+all: $(CNAME) $(SNAME) 
 
-$(SNAME): $(SSRC) $(UTILSRC)
-	$(CC) $(CFLAGS) $(UTILSRC) $(SSRC) -o $(SNAME)
+bonus: $(CBONUS_NAME) $(SBONUS_NAME)
 
-$(CNAME): $(CSRC) $(UTILSRC)
-	$(CC) $(CFLAGS) $(UTILSRC) $(CSRC) -o $(CNAME)
+$(SNAME): $(SOBJS) $(UTILSRC)
+	$(CC) $(CFLAGS) $(UTILSRC) $(SOBJS) -o $(SNAME)
 
-$(SBONUS_NAME): $(SBONUS_SRC) 
-	$(CC) $(CFLAGS) $(UTILSRC) $(SBONUS_SRC) -o $(SBONUS_NAME)
+$(CNAME): $(COBJS) $(UTILSRC)
+	$(CC) $(CFLAGS) $(UTILSRC) $(COBJS) -o $(CNAME)
 
-$(CBONUS_NAME): $(CBONUS_SRC) $(UTILSRC)
-	$(CC) $(CFLAGS) $(UTILSRC) $(CBONUS_SRC) -o $(CBONUS_NAME)
+$(SBONUS_NAME): $(SBONUS_OBJS) $(UTILSRC)
+	$(CC) $(CFLAGS) $(UTILSRC) $(SBONUS_OBJS) -o $(SBONUS_NAME)
 
+$(CBONUS_NAME): $(CBONUS_OBJS) $(UTILSRC)
+	$(CC) $(CFLAGS) $(UTILSRC) $(CBONUS_OBJS) -o $(CBONUS_NAME)
+	
 clean:
-	$(RM) $(CNAME) $(SNAME) $(CBONUS_NAME) $(SBONUS_NAME)
+	$(RM) $(COBJS) $(SOBJS) $(CBONUS_OBJS) $(SBONUS_OBJS)
 
 fclean: clean
-	$(RM) server client
+	$(RM) $(CNAME) $(SNAME) $(CBONUS_NAME) $(SBONUS_NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re 
 
 
