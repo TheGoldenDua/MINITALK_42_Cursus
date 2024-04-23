@@ -6,7 +6,7 @@
 /*   By: del-ganb <del-ganb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 16:29:58 by del-ganb          #+#    #+#             */
-/*   Updated: 2024/04/22 17:33:41 by del-ganb         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:13:50 by del-ganb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	ft_transmit(int signal)
 	if (signal == SIGUSR1 || signal == SIGUSR2)
 	{
 		nb_received++;
-		ft_putnbr(nb_received);
-		ft_putstr(" characters successfuly transmetted.\n");
 		usleep(500);
 	}
 }
@@ -82,7 +80,7 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	send_signal(server_id, '\0');
-	while (1)
-		pause();
+	ft_putnbr(nb_received);
+	ft_putstr(" bits successfuly transmetted.\n");
 	return (0);
 }

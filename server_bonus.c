@@ -6,7 +6,7 @@
 /*   By: del-ganb <del-ganb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 16:30:01 by del-ganb          #+#    #+#             */
-/*   Updated: 2024/04/22 17:31:00 by del-ganb         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:15:34 by del-ganb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void handle_signal(int signal, siginfo_t *info, void *ptr)
 {
     static char current_char;
     static int i;
-    int  client_pid;
+    pid_t  client_pid;
     
-    (void ) ptr;
+    (void)ptr;
     client_pid = info->si_pid;
     current_char |= (signal == SIGUSR1);
     i++;
@@ -32,20 +32,20 @@ void handle_signal(int signal, siginfo_t *info, void *ptr)
         current_char = 0;
     }
     else
-        current_char <<= i;
+        current_char <<= 1;
     kill(client_pid, signal);
 }
 
 int main()
 {
-    int pid;
+    pid_t pid;
     struct sigaction sa;
     
     pid = getpid();
     ft_putstr("Server pid:");
     ft_putnbr(pid);
     ft_putchar('\n');
-    sa.sa_flags = SA_SIGINFO;
+    sa.sa_flags = SA_SIGINFO; 
     sa.sa_sigaction = handle_signal;           
     sigaction(SIGUSR1, &sa, NULL);
     sigaction(SIGUSR2, &sa, NULL);
