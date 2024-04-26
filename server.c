@@ -6,7 +6,7 @@
 /*   By: del-ganb <del-ganb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:42 by del-ganb          #+#    #+#             */
-/*   Updated: 2024/04/21 17:01:44 by del-ganb         ###   ########.fr       */
+/*   Updated: 2024/04/25 06:03:36 by del-ganb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(void)
 	int	pid;
 
 	pid = getpid();
-	ft_putstr("Server id: ");
+	write(1, "Server id: ", 11);
 	ft_putnbr(pid);
 	ft_putchar('\n');
 	signal(SIGUSR1, handle_signal);

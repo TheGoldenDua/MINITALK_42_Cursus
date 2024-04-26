@@ -6,7 +6,7 @@
 /*   By: del-ganb <del-ganb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 16:36:07 by del-ganb          #+#    #+#             */
-/*   Updated: 2024/04/19 16:53:20 by del-ganb         ###   ########.fr       */
+/*   Updated: 2024/04/23 04:50:50 by del-ganb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,6 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putstr(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		ft_putchar(str[i]);
-		i++;
-	}
-}
-
 int	ft_atoi(const char *nptr)
 {
 	int	i;
@@ -75,7 +63,7 @@ int	ft_atoi(const char *nptr)
 
 void	ft_putnbr(int nb)
 {
-	long n;
+	long	n;
 
 	n = nb;
 	if (n < 0)

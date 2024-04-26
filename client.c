@@ -6,7 +6,7 @@
 /*   By: del-ganb <del-ganb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 14:48:33 by del-ganb          #+#    #+#             */
-/*   Updated: 2024/04/21 18:15:25 by del-ganb         ###   ########.fr       */
+/*   Updated: 2024/04/26 03:30:06 by del-ganb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	send_bit(int pid, int bit)
 		signal = SIGUSR2;
 	if (kill(pid, signal) == -1 || pid <= 0)
 	{
-		ft_putstr("incorrect pid!\n");
+		write(1, "Incorrect PID!\n", 16);
 		exit(1);
 	}
 }
 
-void	send_signal(int pid, char c)
+void	send_signal(int pid, unsigned char c)
 {
 	int		i;
 	char	tmp;
@@ -50,20 +50,20 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		ft_putstr("Error, incorrect parameters: <pid> <string to send>\n");
+		write(1, "Error, incorrect parameters: <pid> <string to send>\n", 52);
 		return (0);
 	}
 	if (!is_digit(argv[1]))
 	{
-		ft_putstr("Error, not a valid PID\n");
-		return (0);
+		write(1, "Error, not a valid PID\n", 23);
+		return (1);
 	}
 	server_id = ft_atoi(argv[1]);
 	str = argv[2];
 	i = 0;
 	while (str[i])
 	{
-		send_signal(server_id, str[i]);
+		send_signal(server_id, (unsigned char)str[i]);
 		i++;
 	}
 	send_signal(server_id, '\0');
